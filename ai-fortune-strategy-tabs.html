@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>住職×AI占い副業 完全戦略書</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans JP', 'Yu Gothic', 'Hiragino Sans', sans-serif;
+            background: linear-gradient(135deg, #f5f0e8 0%, #e8dfd0 100%);
+            padding: 20px;
+            line-height: 1.8;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #5B4A8C 0%, #8B7AB8 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .tabs {
+            display: flex;
+            background: #f8f4ed;
+            overflow-x: auto;
+            border-bottom: 2px solid #D4AF37;
+        }
+        
+        .tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            font-size: 15px;
+            font-weight: 600;
+            color: #5B4A8C;
+            transition: all 0.3s;
+            white-space: nowrap;
+            position: relative;
+        }
+        
+        .tab:hover {
+            background: rgba(91, 74, 140, 0.1);
+        }
+        
+        .tab.active {
+            background: white;
+            color: #5B4A8C;
+        }
+        
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #D4AF37;
+        }
+        
+        .content {
+            padding: 30px;
+            display: none;
+        }
+        
+        .content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h2 {
+            color: #5B4A8C;
+            font-size: 24px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #D4AF37;
+        }
+        
+        h3 {
+            color: #5B4A8C;
+            font-size: 18px;
+            margin: 25px 0 15px 0;
+            padding-left: 12px;
+            border-left: 4px solid #D4AF37;
+        }
+        
+        .info-box {
+            background: #f8f4ed;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #5B4A8C;
+        }
+        
+        .persona-card {
+            background: white;
+            border: 2px solid #e8dfd0;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .persona-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f8f4ed;
+        }
+        
+        .persona-icon {
+            font-size: 48px;
+        }
+        
+        .persona-info h4 {
+            color: #5B4A8C;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        
+        .persona-info p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e8dfd0;
+        }
+        
+        th {
+            background: #5B4A8C;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background: #f8f4ed;
+        }
+        
+        .concept-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f4ed 100%);
+            border: 2px solid #D4AF37;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        
+        .concept-card h4 {
+            color: #5B4A8C;
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .rating {
+            color: #D4AF37;
+            font-size: 18px;
+        }
+        
+        .brand-option {
+            background: white;
+            border: 2px solid #e8dfd0;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .brand-option:hover {
+            border-color: #5B4A8C;
+            box-shadow: 0 4px 15px rgba(91, 74, 140, 0.1);
+        }
+        
+        .profile-box {
+            background: #5B4A8C;
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            font-size: 15px;
+            line-height: 1.8;
+            white-space: pre-line;
+        }
+        
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .checklist li {
+            padding: 12px;
+            margin: 8px 0;
+            background: #f8f4ed;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .checklist li::before {
+            content: '☐';
+            font-size: 20px;
+            color: #5B4A8C;
+        }
+        
+        .price-tag {
+            display: inline-block;
+            background: #D4AF37;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: #FFB7C5;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 0 5px;
+        }
+        
+        .highlight {
+            background: linear-gradient(transparent 60%, #FFE066 60%);
+            font-weight: 600;
+        }
+        
+        .note {
+            background: #fff9e6;
+            border-left: 4px solid #D4AF37;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .tabs {
+                flex-wrap: nowrap;
+            }
+            
+            .tab {
+                font-size: 13px;
+                padding: 12px 15px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🙏 住職による占い副業 完全戦略書</h1>
+            <p>真宗佛光寺派の教えで導く占い鑑定 ｜ 3ヶ月で月10万円達成</p>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('overview')">📊 戦略概要</button>
+            <button class="tab" onclick="showTab('persona')">👤 ペルソナ</button>
+            <button class="tab" onclick="showTab('concept')">💡 コンセプト</button>
+            <button class="tab" onclick="showTab('brand')">🏷️ ブランド名</button>
+            <button class="tab" onclick="showTab('profile')">📝 プロフィール</button>
+            <button class="tab" onclick="showTab('products')">💎 商品設計</button>
+            <button class="tab" onclick="showTab('revenue')">💰 収益計画</button>
+            <button class="tab" onclick="showTab('content')">📱 コンテンツ</button>
+            <button class="tab" onclick="showTab('schedule')">📅 スケジュール</button>
+            <button class="tab" onclick="showTab('checklist')">✅ チェックリスト</button>
+        </div>
+        
+        <!-- 戦略概要 -->
+        <div id="overview" class="content active">
+            <h2>📊 戦略概要</h2>
+            
+            <div class="info-box">
+                <h3>🎯 コアコンセプト</h3>
+                <p style="font-size: 18px; color: #5B4A8C; font-weight: 700; margin: 15px 0;">
+                    「1500年の浄土真宗の教えで、あなたの人生を照らす」
+                </p>
+                <p>真宗佛光寺派の住職という<span class="highlight">唯一無二の肩書き</span>を活かし、信頼性の高い占いサービスを提供します。<br>※裏側でAIを活用しますが、表には出しません。</p>
+            </div>
+            
+            <h3>✅ なぜ「住職の占い」が最強なのか</h3>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>優位性</th>
+                        <th>効果</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1. 圧倒的な信頼性</strong></td>
+                        <td>「怪しい占い」→「お寺の住職なら安心」</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. ターゲット層が3倍</strong></td>
+                        <td>20-60代男女（恋愛・仕事・人生全般）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. 高単価の正当性</strong></td>
+                        <td>49,800円でも「むしろ安い」と感じさせる</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4. 話題性・バズりやすさ</strong></td>
+                        <td>「お坊さん×占い」は注目されやすい</td>
+                    </tr>
+                    <tr>
+                        <td><strong>5. 競合がほぼゼロ</strong></td>
+                        <td>ブルーオーシャン市場</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>📈 3ヶ月ロードマップ</h3>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>期間</th>
+                        <th>目標</th>
+                        <th>重要施策</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Week 1-2</strong></td>
+                        <td>基盤構築</td>
+                        <td>コンセプト確定、SNS開設、コンテンツ30個作成</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Week 3-4</strong></td>
+                        <td>最初の10顧客</td>
+                        <td>無料モニター募集、レビュー収集</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Month 2</strong></td>
+                        <td>月5万円達成</td>
+                        <td>毎日投稿定着、ココナラ出品</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Month 3</strong></td>
+                        <td>月10万円達成</td>
+                        <td>高額商品販売、サブスク導入</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="note">
+                <strong>💡 真宗佛光寺派の特徴を活かす</strong><br>
+                ・阿弥陀如来の慈悲の教え<br>
+                ・「人間の煩悩を受け入れる」→ 占い相談と相性◎<br>
+                ・「悪人正機説」→ 悩みを抱える人に寄り添う姿勢
+            </div>
+        </div>
+        
+        <!-- ペルソナ -->
+        <div id="persona" class="content">
+            <h2>👤 ターゲット・ペルソナ設計</h2>
+            
+            <div class="persona-card">
+                <div class="persona-header">
+                    <div class="persona-icon">👩</div>
+                    <div class="persona-info">
+                        <h4>メインペルソナ：佐藤美咲さん</h4>
+                        <p>35歳・会社員・未婚・年収400万円</p>
+                    </div>
+                </div>
+                
+                <h3>基本情報</h3>
+                <ul>
+                    <li>職業：事務職（東京都）</li>
+                    <li>状況：元彼と別れて3ヶ月、復縁に迷い中</li>
+                    <li>自己投資：月3万円まで可能</li>
+                </ul>
+                
+                <h3>性格・価値観</h3>
+                <ul>
+                    <li>✅ スピリチュアルに興味あるが、怪しいものは避けたい</li>
+                    <li>✅ <strong>仏教やお寺には親近感</strong>（祖母が真宗門徒）</li>
+                    <li>✅ 論理的思考も大切にする</li>
+                    <li>✅ 自己投資には積極的</li>
+                </ul>
+                
+                <h3>悩み</h3>
+                <ul>
+                    <li>💔 復縁すべきか、新しい出会いを探すべきか</li>
+                    <li>💼 仕事にもモヤモヤ（このままでいいのか？）</li>
+                    <li>👨‍👩‍👧 親の期待と自分の生き方のギャップ</li>
+                    <li>😰 漠然とした将来への不安</li>
+                </ul>
+                
+                <h3>あなたのサービスに求めるもの</h3>
+                <div class="info-box">
+                    <p>✅ 恋愛だけでなく、<strong>人生全体のアドバイス</strong></p>
+                    <p>✅ 単なる占いではなく、<strong>心の支え</strong></p>
+                    <p>✅ AIと住職の組み合わせに「<strong>新しさ</strong>」と「<strong>安心感</strong>」</p>
+                    <p>✅ 継続的なサポート</p>
+                </div>
+            </div>
+            
+            <div class="persona-card">
+                <div class="persona-header">
+                    <div class="persona-icon">👨‍💼</div>
+                    <div class="persona-info">
+                        <h4>サブペルソナ：田中健太さん</h4>
+                        <p>42歳・経営者・既婚・年収1,200万円</p>
+                    </div>
+                </div>
+                
+                <h3>基本情報</h3>
+                <ul>
+                    <li>職業：中小企業経営者（従業員20名）</li>
+                    <li>家族：妻・子供2人</li>
+                    <li>予算：高額でも価値があれば投資可能</li>
+                </ul>
+                
+                <h3>悩み</h3>
+                <ul>
+                    <li>📊 事業の方向性に迷っている</li>
+                    <li>🎯 重要な判断をする時の<strong>心の拠り所</strong>が欲しい</li>
+                    <li>😓 ストレス・プレッシャーが大きい</li>
+                    <li>👥 従業員との関係性</li>
+                </ul>
+                
+                <h3>求めるもの</h3>
+                <div class="info-box">
+                    <p>✅ 「占い」ではなく「<strong>人生の指針</strong>」</p>
+                    <p>✅ <strong>浄土真宗の教え</strong>による心の平安</p>
+                    <p>✅ 経営判断の<strong>セカンドオピニオン</strong></p>
+                    <p>✅ 高額でも価値があれば投資する（98,000円も可能）</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- コンセプト -->
+        <div id="concept" class="content">
+            <h2>💡 コンセプト案</h2>
+            
+            <div class="concept-card">
+                <h4>
+                    <span class="rating">⭐⭐⭐⭐⭐</span>
+                    パターンA：浄土真宗の教えで導く占い（最推奨）
+                </h4>
+                
+                <div class="info-box" style="background: white; margin: 15px 0;">
+                    <p style="font-size: 20px; color: #5B4A8C; font-weight: 700; margin-bottom: 10px;">
+                        「阿弥陀如来が導く、あなたの因縁」
+                    </p>
+                    <p style="font-size: 16px; color: #666;">
+                        1500年の浄土真宗の智慧で、あなたの人生を照らします
+                    </p>
+                </div>
+                
+                <h4>ポジショニング</h4>
+                <ul>
+                    <li>占いの信頼性 ＋ 真宗の深さ</li>
+                    <li>スピリチュアル層 ＋ 仏教に親しみのある層</li>
+                    <li><strong>「他力本願」の教え</strong>との親和性◎</li>
+                    <li>※AIは裏側で活用（表には出さない）</li>
+                </ul>
+                
+                <h4>適したターゲット</h4>
+                <p>20-50代女性中心（真宗門徒の家系に育った人も多い）</p>
+                
+                <div class="note">
+                    <strong>💡 真宗らしさの表現</strong><br>
+                    ・「煩悩を持つ凡夫である私たち」→ 悩みを持つのは自然<br>
+                    ・「阿弥陀如来の慈悲」→ どんな悩みも受け止める<br>
+                    ・「念仏」→ 心を落ち着ける実践法の提案
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>
+                    <span class="rating">⭐⭐⭐⭐☆</span>
+                    パターンB：人生相談×占い 統合型
+                </h4>
+                
+                <div class="info-box" style="background: white; margin: 15px 0;">
+                    <p style="font-size: 20px; color: #5B4A8C; font-weight: 700; margin-bottom: 10px;">
+                        「お寺の住職による人生相談」
+                    </p>
+                    <p style="font-size: 16px; color: #666;">
+                        占いで視る、仏教で導く
+                    </p>
+                </div>
+                
+                <h4>ポジショニング</h4>
+                <ul>
+                    <li>「占い」より格上の「人生相談」</li>
+                    <li>心理カウンセリング的要素</li>
+                    <li>より幅広い年齢層にアプローチ</li>
+                </ul>
+                
+                <h4>適したターゲット</h4>
+                <p>30-60代男女（経営者層にも刺さる）</p>
+            </div>
+            
+            <div class="concept-card">
+                <h4>
+                    <span class="rating">⭐⭐⭐☆☆</span>
+                    パターンC：ビジネス特化型
+                </h4>
+                
+                <div class="info-box" style="background: white; margin: 15px 0;">
+                    <p style="font-size: 20px; color: #5B4A8C; font-weight: 700; margin-bottom: 10px;">
+                        「経営者のための仏教判断術」
+                    </p>
+                    <p style="font-size: 16px; color: #666;">
+                        ビジネスの迷いを、浄土真宗の教えで読み解く
+                    </p>
+                </div>
+                
+                <h4>ポジショニング</h4>
+                <ul>
+                    <li>超高単価（98,000円〜300,000円）</li>
+                    <li>経営者・起業家限定</li>
+                </ul>
+                
+                <h4>注意点</h4>
+                <p class="note">⚠️ ニッチすぎる可能性あり。最初は避けた方が無難。</p>
+            </div>
+        </div>
+        
+        <!-- ブランド名 -->
+        <div id="brand" class="content">
+            <h2>🏷️ ブランド名・アカウント名案</h2>
+            
+            <div class="brand-option">
+                <h3>🥇 1位：煩悩鑑定 <span class="rating">⭐⭐⭐⭐⭐</span></h3>
+                <p><strong>アカウント名：</strong> @bonno_kantei</p>
+                
+                <h4>選定理由</h4>
+                <ul>
+                    <li>✅ 覚えやすい（3秒で記憶できる）</li>
+                    <li>✅ ユニーク（他にない）</li>
+                    <li>✅ <strong>仏教要素が明確</strong>（煩悩＝真宗の中心概念）</li>
+                    <li>✅ 検索されやすい</li>
+                    <li>✅ 親しみやすさと専門性のバランス◎</li>
+                    <li>✅ AIを前面に出さない</li>
+                </ul>
+                
+                <div class="note">
+                    <strong>💡 真宗との相性</strong><br>
+                    「煩悩具足の凡夫」という真宗の教えとマッチ。<br>
+                    「煩悩があるのは当然、それでも救われる」というメッセージ性。
+                </div>
+            </div>
+            
+            <div class="brand-option">
+                <h3>🥈 2位：お寺の占い_慧光（えこう） <span class="rating">⭐⭐⭐⭐☆</span></h3>
+                <p><strong>アカウント名：</strong> @otera_uranai_ekou</p>
+                
+                <h4>選定理由</h4>
+                <ul>
+                    <li>✅ 「お寺の」が差別化ポイント</li>
+                    <li>✅ 住職の法名（仮）を入れて親しみ</li>
+                    <li>✅ 分かりやすい</li>
+                    <li>△ やや長い</li>
+                </ul>
+            </div>
+            
+            <div class="brand-option">
+                <h3>🥉 3位：浄土占い <span class="rating">⭐⭐⭐☆☆</span></h3>
+                <p><strong>アカウント名：</strong> @jodo_uranai</p>
+                
+                <h4>選定理由</h4>
+                <ul>
+                    <li>✅ シンプル</li>
+                    <li>✅ 浄土真宗との繋がりが明確</li>
+                    <li>△ やや堅い印象</li>
+                    <li>△ 宗派色が強すぎる可能性</li>
+                </ul>
+            </div>
+            
+            <div class="brand-option">
+                <h3>4位：因縁占い_佛光 <span class="rating">⭐⭐⭐☆☆</span></h3>
+                <p><strong>アカウント名：</strong> @innen_uranai_bukko</p>
+                
+                <h4>選定理由</h4>
+                <ul>
+                    <li>✅ 「因縁」は仏教の中心概念</li>
+                    <li>✅ 「佛光」で宗派アピール</li>
+                    <li>△ やや堅い印象</li>
+                </ul>
+            </div>
+            
+            <div class="info-box" style="margin-top: 30px;">
+                <h3>📝 アカウント名のルール</h3>
+                <ul>
+                    <li>✅ 10文字以内が理想</li>
+                    <li>✅ <strong>全SNSで統一する</strong></li>
+                    <li>✅ 検索されやすいキーワード含む</li>
+                    <li>✅ 読みやすい・覚えやすい</li>
+                    <li>❌ 数字・記号は最小限に</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- プロフィール -->
+        <div id="profile" class="content">
+            <h2>📝 プロフィール文案</h2>
+            
+            <h3>📱 Threads / Instagram用（親しみやすい）</h3>
+            <div class="profile-box">
+🙏 真宗佛光寺派の住職が導く占い 🔮
+
+「煩悩があるからこそ、人間」
+
+1500年続く浄土真宗の教えで
+あなたの因縁を読み解きます。
+
+🌸 こんな方へ
+✓ 恋愛・復縁で悩んでいる
+✓ 人生の岐路に立っている
+✓ 心のモヤモヤを晴らしたい
+✓ 信頼できる占いを探している
+
+📿 住職歴15年 × 鑑定実績1,200件
+阿弥陀如来の慈悲のもと
+あなたを導きます。
+
+💌 無料鑑定はプロフのLINEへ
+
+#仏教占い #お寺 #人生相談 #浄土真宗
+            </div>
+            
+            <h3>🐦 X（Twitter）用（知的・権威性）</h3>
+            <div class="profile-box">
+🙏 真宗佛光寺派僧侶・占い鑑定師
+
+「浄土真宗1500年の智慧」で
+あなたの人生を照らします。
+
+📿 住職歴15年
+🔮 鑑定実績1,200件超
+📚 仏教哲学×心理学×統計学
+
+恋愛・仕事・人間関係の悩みを
+阿弥陀如来の慈悲で包み込みます。
+
+初回無料鑑定→ プロフのLINEへ
+
+「煩悩を持つからこそ、人間らしい」
+            </div>
+            
+            <h3>🎬 TikTok用（視覚重視・シンプル）</h3>
+            <div class="profile-box">
+🙏 お寺の住職
+🔮 占い鑑定師
+
+浄土真宗の教え
+→ あなたの運命を読み解く
+
+📿 真宗佛光寺派 住職歴15年
+💕 恋愛・人生の悩み相談
+
+初回無料🎁
+👇プロフのLINEへ
+
+#浄土真宗 #仏教 #占い #お寺
+            </div>
+            
+            <div class="note" style="margin-top: 30px;">
+                <strong>💡 真宗の教えを活かしたキーワード</strong><br>
+                ・「煩悩」「凡夫」「他力本願」<br>
+                ・「阿弥陀如来の慈悲」<br>
+                ・「念仏」「お念仏」<br>
+                ・「因縁」「縁起」<br>
+                ・「悪人正機」→ 悩みを持つ人こそ救われる
+            </div>
+        </div>
+        
+        <!-- 商品設計 -->
+        <div id="products" class="content">
+            <h2>💎 商品ラインナップ</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>商品名</th>
+                        <th>価格</th>
+                        <th>内容</th>
+                        <th>真宗要素</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>無料法話</strong></td>
+                        <td><span class="price-tag" style="background: #999;">0円</span></td>
+                        <td>今日の一言+簡易占い</td>
+                        <td>法話形式・お念仏</td>
+                    </tr>
+                    <tr>
+                        <td><strong>因縁鑑定ライト</strong></td>
+                        <td><span class="price-tag">1,000円</span></td>
+                        <td>1問1答（2,000字）</td>
+                        <td>因果・縁起の視点</td>
+                    </tr>
+                    <tr>
+                        <td><strong>煩悩解脱鑑定</strong></td>
+                        <td><span class="price-tag">5,000円</span></td>
+                        <td>詳細鑑定（4,000字）</td>
+                        <td>煩悩分析+真宗の教え</td>
+                    </tr>
+                    <tr>
+                        <td><strong>菩提心サポート</strong></td>
+                        <td><span class="price-tag">49,800円</span></td>
+                        <td>3ヶ月継続サポート</td>
+                        <td>月命日の法話付き</td>
+                    </tr>
+                    <tr>
+                        <td><strong>佛光の導きプレミアム</strong></td>
+                        <td><span class="price-tag">98,000円</span></td>
+                        <td>6ヶ月+お寺訪問権</td>
+                        <td>本堂での特別鑑定</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>📋 各商品の詳細</h3>
+            
+            <div class="info-box">
+                <h4>因縁鑑定ライト（1,000円）</h4>
+                <p><strong>内容：</strong></p>
+                <ul>
+                    <li>1つの質問に対する回答</li>
+                    <li>約2,000字の鑑定文</li>
+                    <li><strong>因果応報・縁起の観点</strong>からの分析</li>
+                    <li>具体的な行動アドバイス</li>
+                </ul>
+                <p><strong>納期：</strong>24時間以内</p>
+                <p><strong>真宗要素：</strong>「すべては因縁の結果」という視点で悩みを整理</p>
+            </div>
+            
+            <div class="info-box">
+                <h4>煩悩解脱鑑定（5,000円）</h4>
+                <p><strong>内容：</strong></p>
+                <ul>
+                    <li>詳細な人生鑑定（約4,000字）</li>
+                    <li><strong>あなたの煩悩を108の中から特定</strong></li>
+                    <li>3つの質問に回答</li>
+                    <li>今後3ヶ月の運勢</li>
+                    <li>具体的な行動指針</li>
+                    <li><strong>正信偈の該当部分解説</strong></li>
+                </ul>
+                <p><strong>納期：</strong>48時間以内</p>
+                <p><strong>真宗要素：</strong>煩悩具足の凡夫という教えから、悩みを肯定的に受け止める</p>
+            </div>
+            
+            <div class="info-box">
+                <h4>菩提心サポート（49,800円）</h4>
+                <p><strong>内容：</strong></p>
+                <ul>
+                    <li>3ヶ月間の継続サポート</li>
+                    <li>月1回の詳細鑑定（オンライン対面）</li>
+                    <li>LINE質問し放題</li>
+                    <li><strong>月命日（毎月の命日）に法話メッセージ</strong></li>
+                    <li>開運お守り郵送</li>
+                </ul>
+                <p><strong>真宗要素：</strong>月命日の法要の習慣を活かした継続的な関わり</p>
+            </div>
+            
+            <div class="info-box">
+                <h4>佛光の導きプレミアム（98,000円）</h4>
+                <p><strong>内容：</strong></p>
+                <ul>
+                    <li>6ヶ月間の徹底サポート</li>
+                    <li>月2回の詳細鑑定（オンライン対面）</li>
+                    <li>LINE質問し放題</li>
+                    <li><strong>お寺での特別鑑定（1回・本堂にて）</strong></li>
+                    <li><strong>あなたのためのお勤め（読経）</strong></li>
+                    <li>限定5名/月</li>
+                </ul>
+                <p><strong>真宗要素：</strong>実際のお寺参拝・本堂での鑑定という特別感</p>
+            </div>
+        </div>
+        
+        <!-- 収益計画 -->
+        <div id="revenue" class="content">
+            <h2>💰 収益シミュレーション</h2>
+            
+            <h3>目標：月10万円達成</h3>
+            
+            <div class="concept-card">
+                <h4>パターンA：バランス型</h4>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>因縁鑑定ライト（1,000円）</td>
+                            <td>× 20人</td>
+                            <td>= 20,000円</td>
+                        </tr>
+                        <tr>
+                            <td>煩悩解脱鑑定（5,000円）</td>
+                            <td>× 12人</td>
+                            <td>= 60,000円</td>
+                        </tr>
+                        <tr>
+                            <td>菩提心サポート（49,800円）</td>
+                            <td>× 1人</td>
+                            <td>= 49,800円</td>
+                        </tr>
+                        <tr style="background: #f8f4ed; font-weight: 700;">
+                            <td colspan="2">合計</td>
+                            <td>129,800円</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <p style="margin-top: 15px;"><strong>必要な集客数：</strong></p>
+                <ul>
+                    <li>LINE登録：150人/月</li>
+                    <li>フロント購入率：13%（20人）</li>
+                    <li>ミドル購入率：8%（12人）</li>
+                    <li>バック購入率：0.7%（1人）</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h4>パターンB：高単価型</h4>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>煩悩解脱鑑定（5,000円）</td>
+                            <td>× 10人</td>
+                            <td>= 50,000円</td>
+                        </tr>
+                        <tr>
+                            <td>菩提心サポート（49,800円）</td>
+                            <td>× 2人</td>
+                            <td>= 99,600円</td>
+                        </tr>
+                        <tr style="background: #f8f4ed; font-weight: 700;">
+                            <td colspan="2">合計</td>
+                            <td>149,600円</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <p style="margin-top: 15px;"><strong>必要な集客数：</strong></p>
+                <ul>
+                    <li>LINE登録：100人/月</li>
+                    <li>ミドル購入率：10%（10人）</li>
+                    <li>バック購入率：2%（2人）</li>
+                </ul>
+                
+                <p class="highlight" style="margin-top: 15px;">💡 メリット：少ない顧客数で高収益</p>
+            </div>
+            
+            <h3>📈 3ヶ月の成長曲線</h3>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>月</th>
+                        <th>目標売上</th>
+                        <th>LINE登録</th>
+                        <th>主な施策</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1ヶ月目</strong></td>
+                        <td>3万円</td>
+                        <td>50人</td>
+                        <td>無料モニター、実績作り</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2ヶ月目</strong></td>
+                        <td>7万円</td>
+                        <td>150人（累計）</td>
+                        <td>毎日投稿定着、口コミ</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3ヶ月目</strong></td>
+                        <td>12万円</td>
+                        <td>300人（累計）</td>
+                        <td>高額商品販売開始</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- コンテンツ -->
+        <div id="content" class="content">
+            <h2>📱 コンテンツ戦略</h2>
+            
+            <h3>毎日3回投稿（Threads / X）</h3>
+            
+            <div class="info-box">
+                <h4>🌅 朝投稿（7:00）：法話 + 今日の運勢</h4>
+                <div class="profile-box">
+🌅 今朝の法話
+
+「執着を手放せば、
+道は自然と開ける」
+
+阿弥陀如来は
+いつもあなたを見守っています。
+
+今日のあなたへ🔮
+手放すべきものが見えてきます。
+それは、過去の後悔かもしれません。
+
+牡羊座のあなたは...
+今日は新しい出会いの予感。
+でも、焦りは禁物です。
+
+詳しい鑑定はプロフへ💫
+
+#浄土真宗 #仏教 #占い #朝活
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h4>☀️ 昼投稿（12:00）：仏教豆知識 + 占い</h4>
+                <div class="profile-box">
+📿 煩悩豆知識
+
+人間の煩悩は108つあると言われています。
+除夜の鐘を108回鳴らすのも、
+この煩悩を一つずつ払うためです。
+
+でも真宗では、
+「煩悩があるのは当然」と教えます。
+それでも救われる。
+それが阿弥陀如来の慈悲です。
+
+今日の恋愛運🔮
+煩悩に振り回されず
+冷静な判断ができる日。
+
+あなたの恋愛煩悩度は？
+プロフのLINEで無料チェック👇
+
+#煩悩 #仏教豆知識 #恋愛占い
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h4>🌙 夜投稿（21:00）：心の整理 + 明日への指針</h4>
+                <div class="profile-box">
+🌙 寝る前の瞑想占い
+
+今日一日、お疲れ様でした。
+「南無阿弥陀仏」と
+心の中で唱えてみてください。
+
+明日のあなたは...
+大切な決断をする日になりそう。
+阿弥陀如来があなたを導いてくれます。
+
+今夜寝る前に
+お念仏を10回唱えてみてください。
+心が軽くなります💫
+
+音声ガイドはプロフから🙏
+
+#お念仏 #瞑想 #明日の運勢
+                </div>
+            </div>
+            
+            <h3>🎬 TikTok動画シリーズ案</h3>
+            
+            <div class="concept-card">
+                <h4>シリーズ1：煩悩ランキング</h4>
+                <ul>
+                    <li>「恋愛でよくある煩悩TOP5」</li>
+                    <li>「仕事の悩み、実は煩悩かも？」</li>
+                    <li>「お金の不安＝この煩悩です」</li>
+                    <li>「除夜の鐘108回の意味」</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h4>シリーズ2：真宗の教え × 占い</h4>
+                <ul>
+                    <li>「他力本願の本当の意味」</li>
+                    <li>「悪人正機説が教える人生」</li>
+                    <li>「因縁とは何か？」</li>
+                    <li>「お念仏の効果、実は科学的にも証明されてる」</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h4>シリーズ3：お寺の日常</h4>
+                <ul>
+                    <li>「お寺の朝は5時から始まる」</li>
+                    <li>「住職が占いをする理由」</li>
+                    <li>「実は占いと仏教は似ている」</li>
+                    <li>「こんな悩み相談を受けました」</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- スケジュール -->
+        <div id="schedule" class="content">
+            <h2>📅 実行スケジュール</h2>
+            
+            <h3>Week 1: 基盤構築</h3>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>タスク</th>
+                        <th>所要時間</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Day 1</strong><br>（今日）</td>
+                        <td>
+                            2人でミーティング<br>
+                            ・コンセプト決定<br>
+                            ・ブランド名決定<br>
+                            ・役割分担確認
+                        </td>
+                        <td>2時間</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Day 2</strong></td>
+                        <td>
+                            SNSアカウント開設<br>
+                            ・Threads / X / Instagram / TikTok<br>
+                            ・プロフィール設定
+                        </td>
+                        <td>2時間</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Day 3-4</strong></td>
+                        <td>
+                            ビジュアル制作（Canva）<br>
+                            ・プロフィール画像<br>
+                            ・投稿テンプレート10種
+                        </td>
+                        <td>4時間</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Day 5</strong></td>
+                        <td>
+                            LINE公式アカウント開設<br>
+                            ・挨拶メッセージ<br>
+                            ・リッチメニュー<br>
+                            ・自動応答設定
+                        </td>
+                        <td>2時間</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Day 6-7</strong></td>
+                        <td>
+                            コンテンツ大量生産<br>
+                            ・Threads/X投稿30個（Claude活用）<br>
+                            ・TikTok台本7本
+                        </td>
+                        <td>4時間</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Week 2: ソフトローンチ</h3>
+            
+            <div class="info-box">
+                <h4>無料モニター募集（10名）</h4>
+                <p><strong>募集文例：</strong></p>
+                <div class="profile-box">
+🙏 無料モニター募集 🔮
+
+真宗佛光寺派の住職による占い鑑定
+「煩悩鑑定」がスタートします！
+
+【募集内容】
+通常5,000円の煩悩解脱鑑定を
+→ 完全無料でご提供
+
+【条件】
+✓ 感想・レビューをいただける方
+✓ 先着10名様限定
+
+【鑑定内容】
+・詳細な人生鑑定（4,000字）
+・煩悩分析（108の中から特定）
+・3つの質問に回答
+・お念仏の実践法
+
+ご希望の方はプロフのLINEへ💕
+
+#無料 #占い #モニター募集 #仏教
+                </div>
+            </div>
+            
+            <h3>Month 2-3: 本格展開</h3>
+            
+            <div class="concept-card">
+                <h4>毎日のルーティン</h4>
+                <p><strong>住職担当（午前9:00-12:00）</strong></p>
+                <ul>
+                    <li>コンテンツ作成（30分）</li>
+                    <li>鑑定文作成（1.5時間）</li>
+                    <li>TikTok撮影・編集（1時間）</li>
+                </ul>
+                
+                <p><strong>マーケ担当（午後13:00-15:00）</strong></p>
+                <ul>
+                    <li>SNS投稿実行（30分）</li>
+                    <li>顧客対応（1時間）</li>
+                    <li>データ分析（30分）</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h4>週次・月次タスク</h4>
+                <p><strong>毎週月曜 20:00-21:00：戦略ミーティング</strong></p>
+                <ul>
+                    <li>先週の数字確認</li>
+                    <li>うまくいったこと・課題</li>
+                    <li>今週のテーマ決定</li>
+                </ul>
+                
+                <p><strong>毎月1日：月次振り返り（2時間）</strong></p>
+                <ul>
+                    <li>月間総括</li>
+                    <li>収益分析</li>
+                    <li>戦略調整</li>
+                    <li>来月の目標設定</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- チェックリスト -->
+        <div id="checklist" class="content">
+            <h2>✅ 今日の決定事項チェックリスト</h2>
+            
+            <div class="info-box" style="background: #fff9e6;">
+                <h3>🎯 2人で決めること（今日中・2時間）</h3>
+            </div>
+            
+            <h3>1. コンセプト決定</h3>
+            <ul class="checklist">
+                <li>パターンA：阿弥陀如来が導く因縁（推奨）</li>
+                <li>パターンB：お寺の住職によるAI人生相談</li>
+                <li>パターンC：ビジネス特化型</li>
+                <li>オリジナル案を考える</li>
+            </ul>
+            
+            <h3>2. ブランド名・アカウント名決定</h3>
+            <ul class="checklist">
+                <li>煩悩鑑定AI（推奨）</li>
+                <li>お寺のAI占い_慧光</li>
+                <li>浄土AI</li>
+                <li>因縁占い_佛光</li>
+                <li>オリジナル案を考える</li>
+                <li>全SNSで統一アカウント名を決定</li>
+            </ul>
+            
+            <h3>3. プロフィール文確定</h3>
+            <ul class="checklist">
+                <li>Threads/Instagram用を選ぶ</li>
+                <li>X用を選ぶ</li>
+                <li>TikTok用を選ぶ</li>
+                <li>必要に応じてカスタマイズ</li>
+            </ul>
+            
+            <h3>4. 役割分担の最終確認</h3>
+            <ul class="checklist">
+                <li>マーケティング担当の業務範囲確認</li>
+                <li>クリエイティブ担当（住職）の業務範囲確認</li>
+                <li>週次ミーティング日時決定</li>
+                <li>連絡手段確定（LINE? Slack?）</li>
+            </ul>
+            
+            <h3>5. 明日からのアクション</h3>
+            <ul class="checklist">
+                <li>SNSアカウント開設準備</li>
+                <li>Canvaアカウント作成</li>
+                <li>Claude/ChatGPTの使い方確認</li>
+                <li>スケジュール確保</li>
+            </ul>
+            
+            <div class="note" style="margin-top: 30px;">
+                <h3>📝 記録用テンプレート</h3>
+                <p>以下の情報を記録しておきましょう：</p>
+                <ul>
+                    <li><strong>決定日：</strong>2026年4月__日</li>
+                    <li><strong>コンセプト：</strong>_______________</li>
+                    <li><strong>ブランド名：</strong>_______________</li>
+                    <li><strong>アカウント名：</strong></li>
+                    <ul style="margin-left: 20px;">
+                        <li>Threads: @_______________</li>
+                        <li>X: @_______________</li>
+                        <li>Instagram: @_______________</li>
+                        <li>TikTok: @_______________</li>
+                    </ul>
+                    <li><strong>週次ミーティング：</strong>毎週__曜日 __:__〜</li>
+                </ul>
+            </div>
+            
+            <div class="info-box" style="background: linear-gradient(135deg, #5B4A8C 0%, #8B7AB8 100%); color: white; margin-top: 30px;">
+                <h3 style="color: white; border: none;">🎯 成功への最終メッセージ</h3>
+                <p style="font-size: 16px; line-height: 1.8;">
+                    <strong>なぜこのビジネスは成功するのか：</strong><br><br>
+                    ✅ 競合がいない（ブルーオーシャン）<br>
+                    ✅ 信頼性が高い（真宗佛光寺派の住職）<br>
+                    ✅ 高単価が正当化できる（仏教＋お布施文化）<br>
+                    ✅ ターゲットが広い（20-60代男女）<br>
+                    ✅ 話題性がある（メディア掲載も狙える）<br>
+                    ✅ 2人体制（作業が分散できる）<br>
+                    ✅ AIは裏側で効率化に活用<br><br>
+                    <strong style="font-size: 18px;">3ヶ月後、「あの時始めて本当に良かった」と思える未来が待っています。</strong><br><br>
+                    頑張ってください！応援しています！ 🙏✨
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showTab(tabName) {
+            // すべてのコンテンツを非表示
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // すべてのタブを非アクティブ化
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // 選択されたコンテンツを表示
+            document.getElementById(tabName).classList.add('active');
+            
+            // 選択されたタブをアクティブ化
+            event.target.classList.add('active');
+            
+            // ページトップにスクロール
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
